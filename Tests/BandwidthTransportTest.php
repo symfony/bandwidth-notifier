@@ -60,7 +60,7 @@ final class BandwidthTransportTest extends TransportTestCase
         $response = $this->createMock(ResponseInterface::class);
         $response->expects(self::exactly(2))->method('getStatusCode')->willReturn(202);
         $response->expects(self::once())->method('getContent')->willReturn(json_encode(['id' => 'foo']));
-        $client = new MockHttpClient(function (string $method, string $url) use ($response): ResponseInterface {
+        $client = new MockHttpClient(static function (string $method, string $url) use ($response): ResponseInterface {
             self::assertSame('POST', $method);
             self::assertSame('https://messaging.bandwidth.com/api/v2/users/account_id/messages', $url);
 
